@@ -10,3 +10,5 @@
 |  前端源码   | 后端源码   |
 | ------------ |  ------------ |
 | https://github.com/CN-JakeChen/csamanagement-vue  | https://github.com/CN-JakeChen/csamanagement-springboot  |
+
+![avatar](https://jakechen.top/wp-content/uploads/2020/03/image-1587560612704.png)
