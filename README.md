@@ -9,5 +9,4 @@
 
 |  前端源码   | 后端源码   |
 | ------------ |  ------------ |
-|   | 相较于另一种实现较为复杂  |
-|  通过继承Thread创建线程 | 就是另一种方法的优点  |
+| https://github.com/CN-JakeChen/csamanagement-vue  | https://github.com/CN-JakeChen/csamanagement-springboot  |
