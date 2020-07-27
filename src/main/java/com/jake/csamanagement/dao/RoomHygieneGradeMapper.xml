@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.RoomHygieneGradeMapper">
+
+    <insert id="addRoomHygieneGrade" parameterType="com.jake.csamanagement.entity.RoomHygieneGrade">
+        INSERT INTO room_record(room_id,record,notes) VALUES(#{roomId},#{roomHygieneGrade},#{notes})
+    </insert>
+
+    <select id="getRoomHygieneGradeList" resultType="com.jake.csamanagement.model.RoomHygieneGradeInfo">
+        SELECT rr.room_record_id as roomRecordId,rr.room_id as roomId,bd.build_number as buildNumber,rm.room_number as roomNumber,record as roomGrade,record_date as recordTime FROM room_record rr INNER JOIN room rm ON rr.room_id=rm.room_id INNER JOIN build bd ON rm.build_id=bd.build_id ORDER BY record_date
+    </select>
+
+    <select id="getRoomHygieneGradeListByBuilds" parameterType="java.util.List" resultType="com.jake.csamanagement.model.RoomHygieneGradeInfo">
+        SELECT rr.room_record_id as roomRecordId,rr.room_id as roomId,bd.build_number as buildNumber,rm.room_number as roomNumber,record as roomGrade,record_date as recordTime FROM room_record rr INNER JOIN room rm ON rr.room_id=rm.room_id INNER JOIN build bd ON rm.build_id=bd.build_id WHERE bd.build_number in
+        <foreach collection="list" item="build" open="(" separator="," close=")">
+            #{build}
+        </foreach>
+        ORDER BY record_date
+    </select>
+
+    <update id="updateRoomHygieneGrade">
+        UPDATE room_record SET record=#{record},record_date=#{recordTime} WHERE room_record_id=#{roomRecordId};
+    </update>
+
+</mapper>

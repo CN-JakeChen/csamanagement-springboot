@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.StudentHygieneGradeMapper">
+
+    <insert id="addStudentHygieneGrade" parameterType="com.jake.csamanagement.entity.StudentHygieneGrade">
+        INSERT INTO student_record(student_id,record) VALUES(#{studentNumber},#{record})
+    </insert>
+
+
+    <select id="getStudentHygieneGradeList" resultType="com.jake.csamanagement.model.StudentHygieneGradeInfo">
+        SELECT student_record_id as studentRecordId,bed_number as bedNumber,st.student_id as studentNumber,st.name as studentName,cs.name as className,record as record FROM student_record sr INNER JOIN student st ON sr.student_id=st.student_id INNER JOIN mclass cs ON cs.class_id=st.class_id WHERE st.room_id=#{roomId} AND TO_DAYS(record_date)=TO_DAYS(#{recordTime}) ORDER BY bed_number
+    </select>
+
+    <update id="updateStudentHygieneGrade">
+        UPDATE student_record SET record=#{record},record_date=#{recordTime} WHERE student_record_id=#{studentRecordId};
+    </update>
+</mapper>

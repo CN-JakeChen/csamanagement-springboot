@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.TestMapper">
+    <select id="getUser" resultType="com.jake.csamanagement.entity.User">
+        select * from user where username=#{username}
+    </select>
+
+    <insert id="tTest">
+        insert into build (build_id,build_number) values (#{id},'2');
+    </insert>
+
+    <insert id="tTestb">
+        insert into build (build_id,build_number) values ('a','2');
+    </insert>
+
+    <select id="getT1" resultType="com.jake.csamanagement.entity.Test">
+        SELECT st.bed_number as bedNum,st.student_id as studentId,st.name as studentName,cs.name as ClassName
+FROM student st
+INNER JOIN room rm ON rm.room_id=st.room_id
+INNER JOIN mclass cs ON cs.class_id=st.class_id
+INNER JOIN build bd ON bd.build_id=rm.build_id
+WHERE bd.build_number='17#' AND rm.room_number='201';
+    </select>
+
+    <select id="getT2" resultType="com.jake.csamanagement.entity.Test2">
+        SELECT record,record_date as recordDate FROM room_record WHERE room_id
+IN
+(SELECT rm.room_id  FROM room rm
+INNER JOIN build bd ON bd.build_id=rm.build_id
+WHERE bd.build_number='17#' AND rm.room_number='201');
+    </select>
+    <select id="testPage" resultType="com.jake.csamanagement.entity.PageTest">
+        select * from test
+    </select>
+</mapper>

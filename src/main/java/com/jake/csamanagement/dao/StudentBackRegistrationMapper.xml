@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.StudentBackRegistrationMapper">
+
+    <insert id="addStudentBackRegistration" parameterType="com.jake.csamanagement.entity.StudentBackRegistration">
+            INSERT INTO student_back_registration(student_id) VALUES(#{studentNumber})
+    </insert>
+
+    <select id="getStudentBackRegistrationList" resultType="com.jake.csamanagement.model.StudentLeaveRegistrationInfo">
+      SELECT st.name as studentName,st.student_id as studentNumber,cs.name as className,bd.build_number as buildNumber,rm.room_number as roomNumner,st.bed_number as bedNumber,sbr.in_date as outTime FROM student st INNER JOIN room rm ON rm.room_id=st.room_id INNER JOIN build bd ON bd.build_id=rm.build_id INNER JOIN student_back_registration sbr ON sbr.student_id=st.student_id INNER JOIN mclass cs ON cs.class_id=st.class_id ORDER BY build_number,room_number
+    </select>
+
+    <select id="getStudentBackRegistrationListByBuild" parameterType="java.util.List" resultType="com.jake.csamanagement.model.StudentLeaveRegistrationInfo">
+      SELECT st.name as studentName,st.student_id as studentNumber,cs.name as className,bd.build_number as buildNumber,rm.room_number as roomNumner,st.bed_number as bedNumber,sbr.in_date as outTime FROM student st INNER JOIN room rm ON rm.room_id=st.room_id INNER JOIN build bd ON bd.build_id=rm.build_id INNER JOIN student_back_registration sbr ON sbr.student_id=st.student_id INNER JOIN mclass cs ON cs.class_id=st.class_id WHERE bd.build_number in
+      <foreach collection="list" item="build" open="(" separator="," close=")">
+          #{build}
+      </foreach>
+      ORDER BY build_number,room_number
+    </select>
+    <update id="updateStudentBackRegistration">
+        UPDATE student SET is_leave=0 WHERE student_id=#{studentNumber}
+    </update>
+
+    <select id="getStudentStatusByStudentNumber" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM student WHERE student_id=#{studentNumber} AND is_leave=0;
+    </select>
+</mapper>

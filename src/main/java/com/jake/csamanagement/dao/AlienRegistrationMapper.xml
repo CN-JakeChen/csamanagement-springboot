@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.AlienRegistrationMapper">
+
+    <insert id="addAlienInfo" parameterType="com.jake.csamanagement.entity.AlienRegistration">
+        INSERT INTO alien_registration(person_id,name,phone,out_date,visit_the_reason,visit_build) VALUES(#{personId},#{name},#{phone},#{outDate},#{visitTheReason},#{visitBuild})
+    </insert>
+
+    <select id="getAlienList" parameterType="string" resultType="com.jake.csamanagement.entity.AlienRegistration">
+        SELECT alien_registration_id as id,person_id as personId,name,phone,entry_date as entryDate,out_date as outDate,visit_the_reason as visitTheReason,visit_build as visitBuild FROM alien_registration
+        <if test='visitBuild!=null and visitBuild!=" "'>
+            WHERE visit_build = #{visitBuild}
+        </if>
+
+    </select>
+
+    <select id="getAlienListByList" parameterType="java.util.List" resultType="com.jake.csamanagement.entity.AlienRegistration">
+        SELECT  alien_registration_id as id,person_id as personId,name,phone,entry_date as entryDate,out_date as outDate,visit_the_reason as visitTheReason,visit_build as visitBuild FROM alien_registration WHERE visit_build in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+
+    </select>
+
+    <select id="queryAlienInfo" resultType="com.jake.csamanagement.entity.AlienRegistration">
+        <bind name="pattern" value="'%'+queryInfo+'%'" />
+        SELECT alien_registration_id as id,person_id as personId,name,phone,entry_date as entryDate,out_date as outDate,visit_the_reason as visitTheReason,visit_build as visitBuild FROM alien_registration WHERE name LIKE #{pattern}
+    </select>
+
+    <update id="updateAlienInfo" parameterType="com.jake.csamanagement.entity.AlienRegistration">
+        UPDATE alien_registration SET person_id=#{personId},name=#{name},phone=#{phone},entry_date=#{entryDate},out_date=#{outDate},visit_the_reason=#{visitTheReason},visit_build=#{visitBuild} WHERE alien_registration_id=#{id}
+    </update>
+</mapper>

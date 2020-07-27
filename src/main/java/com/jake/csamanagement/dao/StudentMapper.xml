@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.StudentMapper">
+    <select id="getStudentById" resultType="com.jake.csamanagement.model.StudentInfo">
+        SELECT student_id as studentNumber,st.name as studentName,cs.name as className FROM student st INNER JOIN mclass cs ON st.class_id=cs.class_id WHERE student_id=#{studentId}
+    </select>
+</mapper>

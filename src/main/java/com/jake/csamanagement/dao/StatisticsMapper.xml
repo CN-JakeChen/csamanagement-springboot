@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.StatisticsMapper">
+
+
+    <select id="getRoomRecordStatistics" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM room_record  WHERE YEARWEEK(date_format(record_date,'%Y-%m-%d'),1) = YEARWEEK(now(),1)
+        <if test='number=="1"'>
+            AND record &lt;= #{lowerBound}
+        </if>
+        <if test='number=="2"'>
+            AND record  &gt; #{lowerBound} AND record &lt;= #{upperBound}
+        </if>
+    </select>
+
+
+    <select id="getAlienStatistics" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM alien_registration WHERE date_format(entry_date,'%Y-%m-%d')=(SELECT DATE_ADD((SELECT DATE_FORMAT( DATE_SUB( DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL 1 WEEK), '%Y-%m-%d')),INTERVAL #{dayOfWeek} DAY))
+    </select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.RoomMapper">
+    <select id="getRoomInfo" parameterType="string" resultType="com.jake.csamanagement.model.RoomInfo">
+        SELECT build_number as buildNum,room_number as roomNum,room_id as roomId FROM build bd INNER JOIN room rm ON rm.build_id=bd.build_id
+        	<if test='buildNumber!=null and buildNumber!=" "'>
+                WHERE bd.build_number = #{buildNumber}
+            </if>
+        	<if test='roomNumber!=null and roomNumber!=" "'>
+                AND rm.room_number = #{roomNumber}
+            </if>
+        ORDER BY build_number,room_number
+
+
+    </select>
+
+    <select id="getRoomInfoByList" parameterType="java.util.List" resultType="com.jake.csamanagement.model.RoomInfo">
+          SELECT build_number as buildNum,room_number as roomNum,room_id as roomId FROM build bd INNER JOIN room rm ON rm.build_id=bd.build_id WHERE bd.build_number in
+          <foreach collection="list" item="id" open="(" separator="," close=")">
+                #{id}
+          </foreach>
+
+    </select>
+
+
+    <select id="getNumberOfPeople" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM student WHERE room_id=#{numberOfPeople} GROUP BY room_id
+    </select>
+
+
+</mapper>

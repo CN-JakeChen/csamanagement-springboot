@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.ImportMapper">
+    <insert id="insertDept">
+        INSERT INTO dept (dept_id,name) VALUES (#{deptId},#{deptName});
+    </insert>
+
+    <insert id="insertClass">
+        INSERT INTO mclass (class_id,name,year,dept_id) VALUES (#{classId},#{className},#{year},#{mdeptId});
+    </insert>
+
+    <insert id="insertBuild">
+        INSERT INTO build (build_id,build_number) VALUES (#{buildId},#{buildNumber});
+    </insert>
+
+    <insert id="insertRoom">
+        INSERT INTO room (room_id,build_id,room_number) VALUES (#{roomId},#{rbuildId},#{roomNumber});
+    </insert>
+
+    <insert id="insertStudent">
+        INSERT INTO student (student_id,name,class_id,room_id,bed_number) VALUES (#{studentId},#{name},#{sclassId},#{sroomId},#{bedNumber});
+    </insert>
+</mapper>

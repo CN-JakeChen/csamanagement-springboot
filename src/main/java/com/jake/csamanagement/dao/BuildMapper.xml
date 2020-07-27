@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.BuildMapper">
+
+    <select id="getBuilds" resultType="com.jake.csamanagement.entity.Build">
+        SELECT build_id as buildId,build_number as buildNum FROM build
+    </select>
+</mapper>

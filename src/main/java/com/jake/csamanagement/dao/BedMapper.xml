@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.BedMapper">
+
+    <select id="getBedInfo" resultType="com.jake.csamanagement.entity.Bed">
+        SELECT student_id as studentId,st.name as studentName,cs.name as className,bed_number as bedNum FROM student st INNER JOIN mclass cs ON cs.class_id=st.class_id WHERE room_id=#{roomId} ORDER BY bed_number
+    </select>
+
+    <update id="addBed" parameterType="com.jake.csamanagement.entity.NewBed">
+        UPDATE student SET room_id=#{roomId},bed_number=#{bedNumber} WHERE student_id=#{studentNumber};
+    </update>
+
+    
+    <select id="searchABed" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM student WHERE room_id=#{roomId} AND bed_number=#{bedNumber};
+    </select>
+    
+    <update id="deleteBed">
+        UPDATE student SET room_id=NULL,bed_number=NULL WHERE student_id=#{studentId}
+    </update>
+    
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.StudentLeaveRegistrationMapper">
+
+    <insert id="addStudentInfo" parameterType="com.jake.csamanagement.entity.StudentLeaveRegistration">
+        INSERT INTO student_leave_registration(student_id,leave_the_reason) VALUES(#{studentNumber},#{leaveTheReason})
+    </insert>
+
+    <update id="updateStudentStatus">
+        UPDATE student SET is_leave=#{status} WHERE student_id=#{studentNumber};
+    </update>
+
+    <select id="getStudentInfo" resultType="com.jake.csamanagement.model.StudentLeaveRegistrationInfo">
+        SELECT st.name as studentName,st.student_id as studentNumber,cs.name as className,bd.build_number as buildNumber,rm.room_number as roomNumner,st.bed_number as bedNumber,slr.out_date as outTime,slr.leave_the_reason as leaveTheReason FROM student st INNER JOIN room rm ON rm.room_id=st.room_id INNER JOIN build bd ON bd.build_id=rm.build_id INNER JOIN student_leave_registration slr ON slr.student_id=st.student_id INNER JOIN mclass cs ON cs.class_id=st.class_id ORDER BY build_number,room_number
+    </select>
+
+    <select id="getStudentInfoByBuilds" parameterType="java.util.List" resultType="com.jake.csamanagement.model.StudentLeaveRegistrationInfo">
+        SELECT st.name as studentName,st.student_id as studentNumber,cs.name as className,bd.build_number as buildNumber,rm.room_number as roomNumner,st.bed_number as bedNumber,slr.out_date as outTime,slr.leave_the_reason as leaveTheReason FROM student st INNER JOIN room rm ON rm.room_id=st.room_id INNER JOIN build bd ON bd.build_id=rm.build_id INNER JOIN student_leave_registration slr ON slr.student_id=st.student_id INNER JOIN mclass cs ON cs.class_id=st.class_id WHERE bd.build_number in
+        <foreach collection="list" item="build" open="(" separator="," close=")">
+            #{build}
+        </foreach>
+        ORDER BY build_number,room_number
+    </select>
+
+    <select id="getStudentStatusList" resultType="com.jake.csamanagement.model.StudentLeaveRegistrationInfo">
+        SELECT st.name as studentName,st.student_id as studentNumber,cs.name as className,bd.build_number as buildNumber,rm.room_number as roomNumner,st.bed_number as bedNumber FROM student st INNER JOIN room rm ON rm.room_id=st.room_id INNER JOIN build bd ON bd.build_id=rm.build_id INNER JOIN mclass cs ON cs.class_id=st.class_id WHERE is_leave=#{status}
+    </select>
+
+    <select id="getStudentStatusListByBuilds" resultType="com.jake.csamanagement.model.StudentLeaveRegistrationInfo">
+        SELECT st.name as studentName,st.student_id as studentNumber,cs.name as className,bd.build_number as buildNumber,rm.room_number as roomNumner,st.bed_number as bedNumber FROM student st INNER JOIN room rm ON rm.room_id=st.room_id INNER JOIN build bd ON bd.build_id=rm.build_id INNER JOIN mclass cs ON cs.class_id=st.class_id WHERE is_leave=#{status} AND bd.build_number in
+        <foreach collection="param2" item="build" open="(" separator="," close=")">
+            #{build}
+        </foreach>
+    </select>
+
+    <select id="getStudentStatusByStudentNumber" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM student WHERE student_id=#{studentNumber} AND is_leave=1;
+    </select>
+</mapper>

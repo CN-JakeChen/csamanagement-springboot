@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jake.csamanagement.dao.UserMapper">
+    <insert id="insertUser" parameterType="com.jake.csamanagement.model.AddForm" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user (username,password,role
+        <if test="dept!=null and dept!=0">
+            ,dept_id
+        </if>
+       ) VALUE(#{username},#{password},#{role}
+       <if test="dept!=null and dept!=0">
+        ,#{dept}
+        </if>);
+    </insert>
+
+    <insert id="insertUserMan">
+        INSERT INTO management_field (build_id,id) VALUES(#{buildId},#{userId});
+    </insert>
+
+    <select id="getUsers" parameterType="string" resultType="com.jake.csamanagement.entity.User">
+        SELECT id,username,password,role,dept_id as deptId FROM user
+        <if test='userName!=null and userName!=" "'>
+            <bind name="pattern" value="'%'+userName+'%'" />
+            WHERE username LIKE #{pattern}
+        </if>
+    </select>
+
+    <select id="getUserManField" resultType="string">
+        SELECT build_number FROM management_field INNER JOIN build ON management_field.build_id=build.build_id WHERE id=#{userId}
+    </select>
+
+    <select id="getUserManFieldByUsername" resultType="string">
+        SELECT build_number FROM management_field mf INNER JOIN build ON mf.build_id=build.build_id INNER JOIN user us ON us.id=mf.id WHERE us.username=#{username}
+    </select>
+
+    <update id="updateUser">
+        UPDATE user SET password=#{password} WHERE id=#{userId}
+    </update>
+
+    <delete id="deleteUser">
+        DELETE FROM user WHERE id=#{userId}
+    </delete>
+
+    <select id="getPasswordByUsername" resultType="string">
+        SELECT password FROM user WHERE username=#{username}
+    </select>
+
+    <select id="getRoleByUsername" resultType="java.lang.Integer">
+        SELECT role FROM user WHERE username=#{username}
+    </select>
+</mapper>
