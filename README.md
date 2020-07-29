@@ -11,4 +11,6 @@
 | ------------ |  ------------ |
 | https://github.com/CN-JakeChen/csamanagement-vue  | https://github.com/CN-JakeChen/csamanagement-springboot  |
 
-![file](https://jakechen.top/wp-content/uploads/2020/07/csa_denglu.gif)
+![](https://jakechen.top/wp-content/uploads/2020/07/denglu.jpg)
+![](https://jakechen.top/wp-content/uploads/2020/07/csa_zhuye.jpg)
+![](https://jakechen.top/wp-content/uploads/2020/07/csa_shangchuan-2.jpg)
