@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/license-MIT-blue) ![](https://img.shields.io/badge/version-V1.0-green) ![](https://img.shields.io/badge/blog-jakechen.top-red)
 
 项目简介：
-- 本项目采用前后端分离模式
+- 本项目采用前后端分离模式,非常适合初学者用来学习springboot和vue.js
 - 前端采用Vue.js+Element UI框架
 - 后端采用Spring Boot+MyBatis+Shiro框架，接口风格为Restful风格
 - 数据库使用MySql
