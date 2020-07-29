@@ -2,6 +2,7 @@
 
 
 项目简介：
+- 本项目采用前后端分离模式
 - 前端采用Vue.js+Element UI框架
 - 后端采用Spring Boot+MyBatis+Shiro框架，接口风格为Restful风格
 - 数据库使用MySql
@@ -11,6 +12,7 @@
 | ------------ |  ------------ |
 | https://github.com/CN-JakeChen/csamanagement-vue  | https://github.com/CN-JakeChen/csamanagement-springboot  |
 
+项目截图：
 ![](https://jakechen.top/wp-content/uploads/2020/07/denglu.jpg)
 ![](https://jakechen.top/wp-content/uploads/2020/07/csa_zhuye.jpg)
 ![](https://jakechen.top/wp-content/uploads/2020/07/csa_shangchuan-2.jpg)
