@@ -11,7 +11,4 @@
 | ------------ |  ------------ |
 | https://github.com/CN-JakeChen/csamanagement-vue  | https://github.com/CN-JakeChen/csamanagement-springboot  |
 
-<img src="https://jakechen.top/wp-content/uploads/2020/07/csa_denglu.jpg" width="200" height="200" alt="抖音小程序"/>
-![](https://github.com/CN-JakeChen/PicBed/blob/master/csa_pic/csa_denglu.jpg)
-
-
+![file](https://jakechen.top/wp-content/uploads/2020/07/csa_denglu.gif)
