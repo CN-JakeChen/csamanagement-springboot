@@ -1,6 +1,6 @@
 # 高校公寓管理系统后台
 
-![](https://img.shields.io/badge/license-MIT-blue)
+![](https://img.shields.io/badge/license-MIT-blue) ![](https://img.shields.io/badge/version-V1.0-green) ![](https://img.shields.io/badge/blog-jakechen.top-red)
 
 项目简介：
 - 本项目采用前后端分离模式
