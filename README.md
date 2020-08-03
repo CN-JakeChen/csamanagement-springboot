@@ -18,7 +18,7 @@
 
 项目截图：
 
-项目截图有时可能因为网络原因显示不出来，可以通过我的博客查看我的项目截图，地址：https://jakechen.top/?p=51
+项目截图有时可能因为网络原因显示不出来，还可以通过我的博客查看我的项目截图，地址：https://jakechen.top/?p=51
 
 ![](https://jakechen.top/wp-content/uploads/2020/07/denglu.jpg)
 ![](https://jakechen.top/wp-content/uploads/2020/07/csa_zhuye.jpg)
